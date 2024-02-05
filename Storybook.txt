@@ -1,0 +1,18 @@
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter
+
+def create_storybook(artwork_paths, output_path):
+    pdf = canvas.Canvas(output_path, pagesize=letter)
+
+    for i, path in enumerate(artwork_paths):
+        pdf.drawInlineImage(path, 0, 0, width=letter[0], height=letter[1])
+
+        if i < len(artwork_paths) - 1:
+            pdf.showPage()
+
+    pdf.save()
+
+# Example usage:
+artwork_paths = ["path/to/page1.jpg", "path/to/page2.jpg", "path/to/page3.jpg"]
+create_storybook(artwork_paths, "path/to/custom_storybook.pdf")
+
